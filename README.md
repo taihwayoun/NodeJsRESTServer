@@ -22,6 +22,7 @@ To start
 <li>once the server is running, navigate to the following url: http://localhost:8080
 <li>	username: admin, password: pass
 <li>	Management page is self-explanatory
+</ul>
 
 To test
 <ul>
