@@ -1,4 +1,4 @@
-# NodeJsRESTServer
+# A NodeJs REST Server
 A RESTful server written in Node.js
 
 Required:
