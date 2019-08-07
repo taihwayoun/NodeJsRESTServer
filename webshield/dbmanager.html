@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+    <title>DB Manager</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<body>
+      
+<div class="w3-container">
+    <h1>DB Manager</h1>
+    <div>Hello WebShield. Names or addresses don't need to be typed precisely unless you are adding/updating the data.</div>    
+    <div id="xtot"></div>
+    <form class="w3-container" id="dbman">
+            
+            <input class="w3-input" type="text" id="xid" name='id' style="width: 150px">
+            <label>ID</label>
+            <input class="w3-input" type="text" id="xst" name='status' style="width: 400px; font-size: 8pt">
+            <label>Status</label>
+            <input class="w3-input" type="text" id='xfn' name="first_name" style="width: 400px" >
+            <label>First Name</label>
+            <input class="w3-input" type="text" id='xln' name="last_name" style="width: 400px" >
+            <label>Last Name</label>
+            <input class="w3-input" type="text" id='xad' name="address" style="width: 400px" >
+            <label>Address</label>
+            <table style="width: 800px">
+                <tr>
+                    <td style='width:40%'><input class="w3-input" id='xag' type="number" name="age" placeholder="Number only">
+                        <label>Age</label>
+                    </td>
+                    <td style='width:20%'><input class="w3-radio" type="radio" name="ageFilter" value="exactly" checked>
+                        <label>exactly</label><br>
+                    </td>
+                    <td style='width:20%'><input class="w3-radio" type="radio" name="ageFilter" value="greater">
+                        <label>greater or equal</label>
+                    </td>
+                    <td style='width:20%'><input class="w3-radio" type="radio" name="ageFilter" value="less">
+                        <label>less</label><br>
+                    </td>
+                </tr>
+            </table>
+            <select class="w3-select" name="searchOption" style="width: 400px" >
+                <option value="" disabled selected>Choose a search option</option>
+                <option value="sfn">Search by First Name</option>
+                <option value="sln">Search by Last Name</option>
+                <option value="sad">Search by Address</option>
+                <option value="sag">Search by Age</option>
+                <option value="all">Get all</option>
+              </select><br>
+            </select><br>
+            <button class="w3-button w3-grey" type="button" id="get">Get</button>
+            <button class="w3-button w3-grey" type="reset">Reset</button>
+            <button class="w3-button w3-grey" type="button" id="update">Update</button>
+            <button class="w3-button w3-grey" type="button" id="put">Put</button>
+            <button class="w3-button w3-grey" type="button" id="delete">Delete</button>
+            <button class="w3-button w3-grey" type="button" id="next">Next</button>
+    </form>
+<script>
+    let ret, crud, current;
+    function loadData() {
+        qstr = $("#dbman").serialize();
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log('success');
+                current=0;
+                ret = this.responseText;
+                //$('#returnVal').text(ret);   //uncomment this line to see the return value
+                ret=JSON.parse(ret)
+                ret.sort((a,b)=>parseInt(a.id)>parseInt(b.id));
+                console.log(ret);
+                populate(current);
+            }
+        };
+        let url = "/web?"+qstr;
+        xhttp.open(crud, url, true);
+        xhttp.send();
+    }
+
+    function populate(n){
+        $('#xtot').html('total return: '+ ret.length);
+        $('#xid').val(ret[n].id);
+        $('#xst').val(ret[n].status);
+        $('#xfn').val(ret[n].first_name);
+        $('#xln').val(ret[n].last_name);
+        $('#xad').val(ret[n].address);
+        $('#xag').val(ret[n].age);
+
+    }
+    function get(){
+        crud='GET';
+        loadData();
+    }
+    function update(){
+        crud='POST';
+        loadData();
+        //ret=[];
+        //$('#dbman').reset();
+    }
+    function put(){
+        crud='PUT';
+        loadData();
+    }
+    function remove(){
+        crud='DELETE';
+        loadData();
+    }
+
+    function next(){
+        if (current >= ret.length) current=0;
+        else if (current >=0) ++current;
+        populate(current);
+    }
+
+    document.getElementById("get").addEventListener("click", get);
+    document.getElementById("next").addEventListener("click", next);
+    document.getElementById("update").addEventListener("click", update);
+    document.getElementById("put").addEventListener("click", put);
+    document.getElementById("delete").addEventListener("click", remove);
+
+    /*
+ $(document).ready(
+    function(){
+        $("#jget").click(function(){
+            let url = "/web?"+ $("#dbman").serialize();
+            $.getJSON(url, function(result){
+            $.each(result, function(i, field){
+                $("#returnVal").append(field);
+            });           
+          });
+        });
+});
+*/
+</script>
+</div>
+
+<div id="returnVal"></div>
+
+</body>
+</html>
