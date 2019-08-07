@@ -1,38 +1,50 @@
-# A NodeJs REST Server
+# A Simple NodeJs REST Server
 A RESTful server written in Node.js
 
-Required:
-•	npm
-•	nodejs (install: npm node)
-•	express-basic-auth (intall: npm express-basic-auth)
+All of the following are done on the command line.
 
-all on the command line
+Required:
+<ul>
+<li>	npm
+<li>	nodejs (install: npm node)
+<li>	express-basic-auth (intall: npm express-basic-auth)
+</ul>
 
 Then
-•	in the same folder as these guys are: install express (npm install express –save)
-•	npm install mocha
+<ul>
+<li>	in the same folder as these guys are: install express (npm install express –save)
+<li>	npm install mocha
+</ul>
 
 To start
-•	node server
-•	once the server is running, get the web: http://localhost:8080
-•	username: admin, password: pass
-•	Management page is self-explanatory
+<ul>
+<li>node server
+<li>once the server is running, navigate to the following url: http://localhost:8080
+<li>	username: admin, password: pass
+<li>	Management page is self-explanatory
 
 To test
-•	In the same folder: npm test
-•	You are free to add tests.
+<ul>
+<li> install mocha: npm install mocha
+<li>	In the same folder: npm test
+<li>	You are free to add tests.
+</ul>
 
 
 Files:
-(1)	Server.js : a basic REST server, with in-memory data which are installed once the server file is run
-(2)	Db.js: the main REST engine, with a couple of auxiliary functions
-(3)	Person.js: the Person model
-(4)	Data.js: an array of JSON objects to be installed as the initial data set
+<ul>
+<li>	Server.js : a basic REST server, with in-memory data which are installed once the server file is run
+<li>	Db.js: the main REST engine, with a couple of auxiliary functions
+<li>	Person.js: the Person model
+<li>	Data.js: an array of JSON objects to be installed as the initial data set
+</ul>
 
 Functions
-•	All REST functions return an array of JSON objects, at least []; unfortunately, not error-free  (therefore, no stress testing)
-•	get functions: searchByName, searchByLastName, searchByAddress, searchByAge
-•	post: update
-•	put: add
-•	delete: remove
-•	auxiliary functions: getById, toLocalDateTime
+<ul>
+<li>	All REST functions return an array of JSON objects, at least []; unfortunately, not error-free  (therefore, no stress testing)
+<li>	get functions: searchByName, searchByLastName, searchByAddress, searchByAge
+<li>	post: update
+<li>	put: add
+<li>	delete: remove
+<li>	auxiliary functions: getById, toLocalDateTime
+</ul>
